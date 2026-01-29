@@ -30,16 +30,11 @@ cd alibabacloud-rds-openapi-mcp-server/skill
 
 ### 2. Install Dependencies
 
-Install required Alibaba Cloud SDKs using `pip3`:
+Install uv:
 
 ```bash
-pip3 install -r alibabacloud-rds-copilot/requirements.txt
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
-
-Dependency list:
-- `alibabacloud_rdsai20250507>=1.0.0` - Alibaba Cloud RDS AI SDK
-- `alibabacloud_tea_openapi>=0.3.0` - Alibaba Cloud OpenAPI Core Library
-- `alibabacloud_tea_util>=0.3.0` - Alibaba Cloud Utility Library
 
 ### 3. Configure Environment Variables
 

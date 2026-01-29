@@ -1,7 +1,7 @@
 ---
 name: alibabacloud-rds-copilot
-description: 使用阿里云 RDS Copilot API,帮助用户完成 RDS 相关的智能问答、SQL 优化、实例运维和故障排查, 可直接调用 scripts/call_rds_ai.py 脚本获取实时结果。
-metadata: {"moltbot":{"emoji":"🗄️","homepage":"https://www.aliyun.com/product/rds","requires":{"bins":["python3"],"env":["ALIBABA_CLOUD_ACCESS_KEY_ID","ALIBABA_CLOUD_ACCESS_KEY_SECRET"]},"os":["darwin","linux"]}}
+description: 使用阿里云 RDS Copilot API,帮助用户完成 RDS 相关的智能问答、SQL 优化、实例运维和故障排查, 可直接调用 uv run ./scripts/call_rds_ai.py 脚本获取实时结果。
+metadata: {"clawdbot":{"emoji":"🗄️","homepage":"https://www.aliyun.com/product/rds","requires":{"bins":["uv"],"env":["ALIBABA_CLOUD_ACCESS_KEY_ID","ALIBABA_CLOUD_ACCESS_KEY_SECRET"]},"os":["darwin","linux"]},"moltbot":{"emoji":"🗄️","homepage":"https://www.aliyun.com/product/rds","requires":{"bins":["uv"],"env":["ALIBABA_CLOUD_ACCESS_KEY_ID","ALIBABA_CLOUD_ACCESS_KEY_SECRET"]},"os":["darwin","linux"]}}
 ---
 
 ## Skill 概览
@@ -30,13 +30,13 @@ metadata: {"moltbot":{"emoji":"🗄️","homepage":"https://www.aliyun.com/produ
    - 示例:
      ```bash
      # 基础查询
-     python3 .claude/skills/alibabacloud-rds-copilot/scripts/call_rds_ai.py "查询杭州地域的 RDS MySQL 实例列表"
+     uv run ./scripts/call_rds_ai.py "查询杭州地域的 RDS MySQL 实例列表"
      
      # 指定地域
-     python3 .claude/skills/alibabacloud-rds-copilot/scripts/call_rds_ai.py "优化这条SQL" --region cn-beijing
+     uv run  ./scripts/call_rds_ai.py "优化这条SQL" --region cn-beijing
      
      # 多轮对话
-     python3 .claude/skills/alibabacloud-rds-copilot/scripts/call_rds_ai.py "继续分析" --conversation-id "<上次返回的会话ID>"
+     uv run ./scripts/call_rds_ai.py "继续分析" --conversation-id "<上次返回的会话ID>"
      ```
 
 3. **解析结果并后续处理**

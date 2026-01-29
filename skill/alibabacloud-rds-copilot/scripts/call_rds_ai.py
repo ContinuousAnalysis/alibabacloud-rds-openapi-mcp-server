@@ -1,4 +1,12 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run
+# /// script
+# requires-python = ">=3.7"
+# dependencies = [
+#     "alibabacloud_rdsai20250507>=1.0.0",
+#     "alibabacloud_tea_openapi>=0.3.0",
+#     "alibabacloud_tea_util>=0.3.0",
+# ]
+# ///
 # -*- coding: utf-8 -*-
 """
 阿里云 RDS AI 助手调用脚本

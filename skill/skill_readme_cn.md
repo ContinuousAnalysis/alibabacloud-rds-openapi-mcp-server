@@ -31,16 +31,11 @@ cd alibabacloud-rds-openapi-mcp-server/skill
 
 ### 2. 安装依赖
 
-使用 `pip3` 安装所需的阿里云 SDK：
+安装uv：
 
 ```bash
-pip3 install -r alibabacloud-rds-copilot/requirements.txt
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
-
-依赖包列表：
-- `alibabacloud_rdsai20250507>=1.0.0` - 阿里云 RDS AI SDK
-- `alibabacloud_tea_openapi>=0.3.0` - 阿里云 OpenAPI 核心库
-- `alibabacloud_tea_util>=0.3.0` - 阿里云工具库
 
 ### 3. 配置环境变量
 
