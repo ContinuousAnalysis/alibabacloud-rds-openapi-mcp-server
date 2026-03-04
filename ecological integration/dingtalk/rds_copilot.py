@@ -212,7 +212,7 @@ class RdsCopilot:
         # 初始化OpenAPI配置
         config = open_api_models.Config(
             access_key_id=os.getenv('ACCESS_KEY_ID'),
-            access_key_secret=os.getenv('ACCESS_KEY_SECRET'),
+            access_key_secret=os.getenv('ACCESS_SECRET'),
             protocol='https',
             region_id='cn-hangzhou',
             endpoint='rdsai.aliyuncs.com',
