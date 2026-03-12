@@ -230,10 +230,25 @@ uv run python -m alibabacloud_rds_openapi_mcp_server.run_tool run describe_db_in
    - OpenClaw：`~/.openclaw/workspace/skills/rds-openapi-skill/`  
    - Claude Code：`~/.claude/skills/rds-openapi-skill/` 或项目内 `.claude/skills/rds-openapi-skill/`
 
-2. **确保环境中可执行**  
-   安装本包并配置好环境变量后，保证在终端能直接运行 `rds-openapi-skill`。大模型会按 SKILL.md 中的说明调用 `rds-openapi-skill list` 与 `rds-openapi-skill run <name> '<json>'`。
+2. **配置 entries 并写入 env（推荐）**  
+   本 skill 需要环境变量 `ALIBABA_CLOUD_ACCESS_KEY_ID` 和 `ALIBABA_CLOUD_ACCESS_KEY_SECRET`。建议在平台的 **entries** 里为 `rds-openapi-skill` 配置 `env`，把这两个变量写进去，后续使用无需再单独配置。  
+   - **OpenClaw**：编辑 `~/.openclaw/openclaw.json`，在 `skills.entries` 中增加：
+     ```json
+     "rds-openapi-skill": {
+       "enabled": true,
+       "env": {
+         "ALIBABA_CLOUD_ACCESS_KEY_ID": "你的 AccessKey ID",
+         "ALIBABA_CLOUD_ACCESS_KEY_SECRET": "你的 AccessKey Secret"
+       }
+     }
+     ```
+   - 可选：同一 `env` 中可加 `ALIBABA_CLOUD_SECURITY_TOKEN`（STS）、`MCP_TOOLSETS`（如 `"rds,rds_custom_read"`）。  
+   - **Claude Code 等**：在对应技能的「entries」或「环境变量」配置中为 `rds-openapi-skill` 设置上述两个 env 即可。
 
-3. **Skill 内容说明**  
-   - `skill/rds-openapi-skill/SKILL.md`：技能名称、描述、何时使用、标准流程与常用工具速查。  
+3. **确保环境中可执行**  
+   安装本包后，保证在终端能直接运行 `rds-openapi-skill`。大模型会按 SKILL.md 中的说明调用 `rds-openapi-skill list` 与 `rds-openapi-skill run <name> '<json>'`。
+
+4. **Skill 内容说明**  
+   - `skill/rds-openapi-skill/SKILL.md`：技能名称、描述、何时使用、标准流程、**配置 entries** 与常用工具速查。  
    - `skill/rds-openapi-skill/tools_reference.md`：工具名与参数参考。  
    - `skill/rds-openapi-skill/skill.yaml`：供 OpenClaw/ClawHub 使用的元数据（可选）。

@@ -19,7 +19,9 @@ entry_points:
     command: rds-openapi-skill run <tool_name> '<json_args>'
     description: 执行指定工具
 
-# 依赖
+# 依赖：需在平台配置 entries 时为本 skill 注入 env，便于后续使用
+# 例如 OpenClaw 在 ~/.openclaw/openclaw.json 的 skills.entries 中配置：
+#   "rds-openapi-skill": { "enabled": true, "env": { "ALIBABA_CLOUD_ACCESS_KEY_ID": "...", "ALIBABA_CLOUD_ACCESS_KEY_SECRET": "..." } }
 requires:
   bins: [uv]
   env:

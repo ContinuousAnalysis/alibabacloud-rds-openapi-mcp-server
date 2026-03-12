@@ -228,10 +228,25 @@ uv run python -m alibabacloud_rds_openapi_mcp_server.run_tool run describe_db_in
    - OpenClaw: `~/.openclaw/workspace/skills/rds-openapi-skill/`
    - Claude Code: `~/.claude/skills/rds-openapi-skill/` or project-local `.claude/skills/rds-openapi-skill/`
 
-2. **Ensure the CLI is available**  
-   After installing the package and setting the environment variables, ensure `rds-openapi-skill` runs in the terminal. The model will follow the instructions in SKILL.md and call `rds-openapi-skill list` and `rds-openapi-skill run <name> '<json>'`.
+2. **Configure entries and set env (recommended)**  
+   This skill requires the environment variables `ALIBABA_CLOUD_ACCESS_KEY_ID` and `ALIBABA_CLOUD_ACCESS_KEY_SECRET`. It is recommended to configure **entries** for `rds-openapi-skill` and set these in `env` so they are available when the skill runs, without configuring them elsewhere.
+   - **OpenClaw**: Edit `~/.openclaw/openclaw.json` and add under `skills.entries`:
+     ```json
+     "rds-openapi-skill": {
+       "enabled": true,
+       "env": {
+         "ALIBABA_CLOUD_ACCESS_KEY_ID": "your-access-key-id",
+         "ALIBABA_CLOUD_ACCESS_KEY_SECRET": "your-access-key-secret"
+       }
+     }
+     ```
+   - Optional: add `ALIBABA_CLOUD_SECURITY_TOKEN` (for STS) or `MCP_TOOLSETS` (e.g. `"rds,rds_custom_read"`) in the same `env`.
+   - **Claude Code and others**: In the skill's "entries" or "environment variables" configuration, set the two env vars above for `rds-openapi-skill`.
 
-3. **Skill contents**  
-   - `skill/rds-openapi-skill/SKILL.md`: Skill name, description, when to use it, standard workflow, and tool quick reference.
+3. **Ensure the CLI is available**  
+   After installing the package, ensure `rds-openapi-skill` runs in the terminal. The model will follow the instructions in SKILL.md and call `rds-openapi-skill list` and `rds-openapi-skill run <name> '<json>'`.
+
+4. **Skill contents**  
+   - `skill/rds-openapi-skill/SKILL.md`: Skill name, description, when to use it, standard workflow, **entries configuration**, and tool quick reference.
    - `skill/rds-openapi-skill/tools_reference.md`: Tool names and parameter reference.
    - `skill/rds-openapi-skill/skill.yaml`: Metadata for OpenClaw/ClawHub (optional).
