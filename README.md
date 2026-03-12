@@ -185,7 +185,10 @@ If no toolset is specified, the default `rds` group is loaded automatically.
 None at this time
 
 ### Skills
-This project supports extending the capabilities of RDS Copilot through Skills. Skills are predefined capability modules that enable AI assistants to perform more complex tasks.
+This project supports extending the capabilities of RDS Copilot through Skills. Two skills are available:
+
+- **alibabacloud-rds-copilot**: Invokes the RDS AI Assistant API for intelligent Q&A, SQL optimization, and troubleshooting.
+- **rds-openapi-skill**: Exposes this project’s **OpenAPI tools** and **SQL tools** as a **script/CLI** for use with **OpenClaw**, **Claude Code**, and similar platforms. The model runs `rds-openapi-skill list` and `rds-openapi-skill run <tool_name> '<JSON args>'` to manage RDS instances (query instances, monitoring, slow logs, parameters, run read-only SQL, etc.). After installing the package, the `rds-openapi-skill` command is available; the skill directory is `skill/rds-openapi-skill/`.
 
 For detailed information on using Skills, please refer to: [Skills Documentation](./skill/skill_readme.md)
 

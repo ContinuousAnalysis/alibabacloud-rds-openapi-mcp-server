@@ -1,4 +1,13 @@
-# RDS Copilot Claude Skill
+# RDS 相关 Skills 使用说明
+
+本仓库提供两类 Skill，均可用于 Claude、OpenClaw、Claude Code 等以「技能」形式接入：
+
+1. **alibabacloud-rds-copilot**：调用阿里云 RDS AI 助手 API，完成智能问答、SQL 优化、故障排查等。
+2. **rds-openapi-skill**：通过命令行直接调用本项目的 **RDS OpenAPI 工具** 与 **只读 SQL 工具**，管理实例、查监控/慢日志/参数、执行只读 SQL 等。
+
+---
+
+## 一、RDS Copilot Claude Skill（RDS AI 助手）
 
 阿里云 [RDS AI助手](https://help.aliyun.com/zh/rds/apsaradb-rds-for-mysql/rds-copilot-overview) 的 Claude Skill，用于在 Claude 对话中直接调用 RDS AI 助手能力，完成 SQL 优化、实例运维、故障排查等任务。
 
@@ -173,3 +182,73 @@ pip3 list | grep alibabacloud
 ```bash
 python3 alibabacloud-rds-copilot/scripts/call_rds_ai.py "your query"
 ```
+
+---
+
+## 二、RDS OpenAPI Skill（OpenAPI + SQL 工具命令行）
+
+**rds-openapi-skill** 将本项目的 MCP 工具以「脚本/命令行」形式暴露，便于接入 **OpenClaw、Claude Code** 等：大模型通过执行 `rds-openapi-skill list` / `rds-openapi-skill run <工具名> '<JSON 参数>'` 来调用 RDS OpenAPI 与只读 SQL 能力，从而管理 RDS 实例。
+
+### 能力概览
+
+- **OpenAPI 工具**：查询实例列表/详情、可用区/规格、监控、慢日志、参数、账号、数据库、白名单；创建/修改实例与账号、改参数/规格、重启、公网连接等。
+- **SQL 工具**：只读执行 `query_sql`、`explain_sql`、`show_create_table`、`show_engine_innodb_status`、`show_largest_table`、`show_largest_table_fragment` 等。
+
+### 安装与配置
+
+1. **安装本包**（任选其一）  
+   - 在仓库根目录：`uv pip install -e .` 或 `pip install -e .`  
+   - 安装后可使用命令：`rds-openapi-skill`
+
+2. **环境变量**（与 MCP 服务相同）  
+   - `ALIBABA_CLOUD_ACCESS_KEY_ID`、`ALIBABA_CLOUD_ACCESS_KEY_SECRET`（必填）  
+   - 可选：`ALIBABA_CLOUD_SECURITY_TOKEN`、`MCP_TOOLSETS`（默认 `rds`）
+
+### 命令行用法
+
+```bash
+# 列出当前启用的工具（JSON）
+rds-openapi-skill list
+
+# 执行工具，参数为 JSON 字符串
+rds-openapi-skill run describe_db_instances '{"region_id":"cn-hangzhou"}'
+rds-openapi-skill run describe_db_instance_attribute '{"region_id":"cn-hangzhou","db_instance_id":"rm-xxxxx"}'
+rds-openapi-skill run get_current_time '{}'
+```
+
+未安装到环境时，可从仓库根目录用模块方式执行：
+
+```bash
+uv run python -m alibabacloud_rds_openapi_mcp_server.run_tool list
+uv run python -m alibabacloud_rds_openapi_mcp_server.run_tool run describe_db_instances '{"region_id":"cn-hangzhou"}'
+```
+
+### 接入 OpenClaw / Claude Code
+
+1. **部署 Skill 目录**  
+   将 `skill/rds-openapi-skill/` 复制或链接到对应平台的 skills 目录，例如：  
+   - OpenClaw：`~/.openclaw/workspace/skills/rds-openapi-skill/`  
+   - Claude Code：`~/.claude/skills/rds-openapi-skill/` 或项目内 `.claude/skills/rds-openapi-skill/`
+
+2. **配置 entries 并写入 env（推荐）**  
+   本 skill 需要环境变量 `ALIBABA_CLOUD_ACCESS_KEY_ID` 和 `ALIBABA_CLOUD_ACCESS_KEY_SECRET`。建议在平台的 **entries** 里为 `rds-openapi-skill` 配置 `env`，把这两个变量写进去，后续使用无需再单独配置。  
+   - **OpenClaw**：编辑 `~/.openclaw/openclaw.json`，在 `skills.entries` 中增加：
+     ```json
+     "rds-openapi-skill": {
+       "enabled": true,
+       "env": {
+         "ALIBABA_CLOUD_ACCESS_KEY_ID": "你的 AccessKey ID",
+         "ALIBABA_CLOUD_ACCESS_KEY_SECRET": "你的 AccessKey Secret"
+       }
+     }
+     ```
+   - 可选：同一 `env` 中可加 `ALIBABA_CLOUD_SECURITY_TOKEN`（STS）、`MCP_TOOLSETS`（如 `"rds,rds_custom_read"`）。  
+   - **Claude Code 等**：在对应技能的「entries」或「环境变量」配置中为 `rds-openapi-skill` 设置上述两个 env 即可。
+
+3. **确保环境中可执行**  
+   安装本包后，保证在终端能直接运行 `rds-openapi-skill`。大模型会按 SKILL.md 中的说明调用 `rds-openapi-skill list` 与 `rds-openapi-skill run <name> '<json>'`。
+
+4. **Skill 内容说明**  
+   - `skill/rds-openapi-skill/SKILL.md`：技能名称、描述、何时使用、标准流程、**配置 entries** 与常用工具速查。  
+   - `skill/rds-openapi-skill/tools_reference.md`：工具名与参数参考。  
+   - `skill/rds-openapi-skill/skill.yaml`：供 OpenClaw/ClawHub 使用的元数据（可选）。
