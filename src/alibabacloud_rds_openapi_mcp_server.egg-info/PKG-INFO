@@ -1,3 +1,26 @@
+Metadata-Version: 2.4
+Name: alibabacloud-rds-openapi-mcp-server
+Version: 3.1.2
+Summary: MCP server for RDS Services via OPENAPI.
+Author: AlibabaCloud RDS
+License-Expression: Apache-2.0
+Project-URL: Homepage, https://github.com/aliyun/alibabacloud-rds-openapi-mcp-server
+Project-URL: Documentation, https://github.com/aliyun/alibabacloud-rds-openapi-mcp-server/
+Project-URL: Source, https://github.com/aliyun/alibabacloud-rds-openapi-mcp-server.git
+Project-URL: Bug Tracker, https://github.com/aliyun/alibabacloud-rds-openapi-mcp-server/issues
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: alibabacloud-bssopenapi20171214>=5.0.0
+Requires-Dist: alibabacloud-das20200116==2.7.1
+Requires-Dist: alibabacloud-rds20140815>=11.0.0
+Requires-Dist: alibabacloud-vpc20160428>=6.11.4
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp[cli]>=1.11.0
+Requires-Dist: pymysql>=1.1.1
+Requires-Dist: pyodbc>=5.2.0
+Dynamic: license-file
+
 <p align="center">English | <a href="./README_CN.md">中文</a><br></p>
 
 # Alibaba Cloud RDS OpenAPI MCP Server
@@ -185,10 +208,7 @@ If no toolset is specified, the default `rds` group is loaded automatically.
 None at this time
 
 ### Skills
-This project supports extending the capabilities of RDS Copilot through Skills. Two skills are available:
-
-- **alibabacloud-rds-copilot**: Invokes the RDS AI Assistant API for intelligent Q&A, SQL optimization, and troubleshooting.
-- **alibabacloud-rds-instances-manage**: Exposes this project's **OpenAPI tools** and **SQL tools** as a **script/CLI** for use with **OpenClaw**, **Claude Code**, and similar platforms. The model runs `alibabacloud-rds-instances-manage list` and `alibabacloud-rds-instances-manage run <tool_name> '<JSON args>'` to manage RDS instances (query instances, monitoring, slow logs, parameters, run read-only SQL, etc.). After installing the package, the `alibabacloud-rds-instances-manage` command is available; the skill directory is `skill/alibabacloud-rds-instances-manage/`.
+This project supports extending the capabilities of RDS Copilot through Skills. Skills are predefined capability modules that enable AI assistants to perform more complex tasks.
 
 For detailed information on using Skills, please refer to: [Skills Documentation](./skill/skill_readme.md)
 

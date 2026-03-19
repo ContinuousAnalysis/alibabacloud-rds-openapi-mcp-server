@@ -3,7 +3,7 @@
 This repository provides two skills that can be used with Claude, OpenClaw, Claude Code, and similar platforms:
 
 1. **alibabacloud-rds-copilot**: Invokes the Alibaba Cloud RDS AI Assistant API for intelligent Q&A, SQL optimization, and troubleshooting.
-2. **rds-openapi-skill**: Exposes this project’s **RDS OpenAPI tools** and **read-only SQL tools** via a **script/CLI**, so you can manage instances, query monitoring/slow logs/parameters, and run read-only SQL.
+2. **alibabacloud-rds-instances-manage**: Exposes this project's **RDS OpenAPI tools** and **read-only SQL tools** via a **script/CLI**, so you can manage instances, query monitoring/slow logs/parameters, and run read-only SQL.
 
 ---
 
@@ -183,9 +183,9 @@ python3 alibabacloud-rds-copilot/scripts/call_rds_ai.py "your query"
 
 ---
 
-## II. RDS OpenAPI Skill (OpenAPI + SQL tools via CLI)
+## II. Alibabacloud RDS Instances Manage (OpenAPI + SQL tools via CLI)
 
-**rds-openapi-skill** exposes this project’s MCP tools as a **script/CLI** for use with **OpenClaw**, **Claude Code**, and similar platforms. The model runs `rds-openapi-skill list` and `rds-openapi-skill run <tool_name> '<JSON args>'` to call RDS OpenAPI and read-only SQL capabilities and manage RDS instances.
+**alibabacloud-rds-instances-manage** exposes this project's MCP tools as a **script/CLI** for use with **OpenClaw**, **Claude Code**, and similar platforms. The model runs `alibabacloud-rds-instances-manage list` and `alibabacloud-rds-instances-manage run <tool_name> '<JSON args>'` to call RDS OpenAPI and read-only SQL capabilities and manage RDS instances.
 
 ### Capabilities
 
@@ -196,7 +196,7 @@ python3 alibabacloud-rds-copilot/scripts/call_rds_ai.py "your query"
 
 1. **Install the package** (either approach):
    - From the repository root: `uv pip install -e .` or `pip install -e .`
-   - After installation, the `rds-openapi-skill` command is available.
+   - After installation, the `alibabacloud-rds-instances-manage` command is available.
 
 2. **Environment variables** (same as the MCP server):
    - `ALIBABA_CLOUD_ACCESS_KEY_ID`, `ALIBABA_CLOUD_ACCESS_KEY_SECRET` (required)
@@ -206,12 +206,12 @@ python3 alibabacloud-rds-copilot/scripts/call_rds_ai.py "your query"
 
 ```bash
 # List currently enabled tools (JSON output)
-rds-openapi-skill list
+alibabacloud-rds-instances-manage list
 
 # Run a tool; arguments are a JSON string
-rds-openapi-skill run describe_db_instances '{"region_id":"cn-hangzhou"}'
-rds-openapi-skill run describe_db_instance_attribute '{"region_id":"cn-hangzhou","db_instance_id":"rm-xxxxx"}'
-rds-openapi-skill run get_current_time '{}'
+alibabacloud-rds-instances-manage run describe_db_instances '{"region_id":"cn-hangzhou"}'
+alibabacloud-rds-instances-manage run describe_db_instance_attribute '{"region_id":"cn-hangzhou","db_instance_id":"rm-xxxxx"}'
+alibabacloud-rds-instances-manage run get_current_time '{}'
 ```
 
 If the package is not installed in the environment, run via module from the repository root:
@@ -224,15 +224,15 @@ uv run python -m alibabacloud_rds_openapi_mcp_server.run_tool run describe_db_in
 ### Integrating with OpenClaw / Claude Code
 
 1. **Deploy the skill directory**  
-   Copy or link `skill/rds-openapi-skill/` into the platform’s skills directory, for example:
-   - OpenClaw: `~/.openclaw/workspace/skills/rds-openapi-skill/`
-   - Claude Code: `~/.claude/skills/rds-openapi-skill/` or project-local `.claude/skills/rds-openapi-skill/`
+   Copy or link `skill/alibabacloud-rds-instances-manage/` into the platform's skills directory, for example:
+   - OpenClaw: `~/.openclaw/workspace/skills/alibabacloud-rds-instances-manage/`
+   - Claude Code: `~/.claude/skills/alibabacloud-rds-instances-manage/` or project-local `.claude/skills/alibabacloud-rds-instances-manage/`
 
 2. **Configure entries and set env (recommended)**  
-   This skill requires the environment variables `ALIBABA_CLOUD_ACCESS_KEY_ID` and `ALIBABA_CLOUD_ACCESS_KEY_SECRET`. It is recommended to configure **entries** for `rds-openapi-skill` and set these in `env` so they are available when the skill runs, without configuring them elsewhere.
+   This skill requires the environment variables `ALIBABA_CLOUD_ACCESS_KEY_ID` and `ALIBABA_CLOUD_ACCESS_KEY_SECRET`. It is recommended to configure **entries** for `alibabacloud-rds-instances-manage` and set these in `env` so they are available when the skill runs, without configuring them elsewhere.
    - **OpenClaw**: Edit `~/.openclaw/openclaw.json` and add under `skills.entries`:
      ```json
-     "rds-openapi-skill": {
+     "alibabacloud-rds-instances-manage": {
        "enabled": true,
        "env": {
          "ALIBABA_CLOUD_ACCESS_KEY_ID": "your-access-key-id",
@@ -241,12 +241,12 @@ uv run python -m alibabacloud_rds_openapi_mcp_server.run_tool run describe_db_in
      }
      ```
    - Optional: add `ALIBABA_CLOUD_SECURITY_TOKEN` (for STS) or `MCP_TOOLSETS` (e.g. `"rds,rds_custom_read"`) in the same `env`.
-   - **Claude Code and others**: In the skill's "entries" or "environment variables" configuration, set the two env vars above for `rds-openapi-skill`.
+   - **Claude Code and others**: In the skill's "entries" or "environment variables" configuration, set the two env vars above for `alibabacloud-rds-instances-manage`.
 
 3. **Ensure the CLI is available**  
-   After installing the package, ensure `rds-openapi-skill` runs in the terminal. The model will follow the instructions in SKILL.md and call `rds-openapi-skill list` and `rds-openapi-skill run <name> '<json>'`.
+   After installing the package, ensure `alibabacloud-rds-instances-manage` runs in the terminal. The model will follow the instructions in SKILL.md and call `alibabacloud-rds-instances-manage list` and `alibabacloud-rds-instances-manage run <name> '<json>'`.
 
 4. **Skill contents**  
-   - `skill/rds-openapi-skill/SKILL.md`: Skill name, description, when to use it, standard workflow, **entries configuration**, and tool quick reference.
-   - `skill/rds-openapi-skill/tools_reference.md`: Tool names and parameter reference.
-   - `skill/rds-openapi-skill/skill.yaml`: Metadata for OpenClaw/ClawHub (optional).
+   - `skill/alibabacloud-rds-instances-manage/SKILL.md`: Skill name, description, when to use it, standard workflow, **entries configuration**, and tool quick reference.
+   - `skill/alibabacloud-rds-instances-manage/tools_reference.md`: Tool names and parameter reference.
+   - `skill/alibabacloud-rds-instances-manage/skill.yaml`: Metadata for OpenClaw/ClawHub (optional).

@@ -1,6 +1,6 @@
-# RDS OpenAPI Skill 工具参考
+# Alibabacloud RDS Instances Manage 工具参考
 
-以下为 `rds-openapi-skill list` 默认工具集（`rds`）中的工具名及主要参数说明，便于大模型构造 `rds-openapi-skill run <name> '<json>'` 的 JSON。
+以下为 `alibabacloud-rds-instances-manage list` 默认工具集（`rds`）中的工具名及主要参数说明，便于大模型构造 `alibabacloud-rds-instances-manage run <name> '<json>'` 的 JSON。
 
 ## OpenAPI 只读类
 
@@ -113,4 +113,4 @@
 - **show_largest_table_fragment**  
   - `region_id`, `db_instance_id`, 可选 `topK`
 
-参数名以各工具在代码中的定义为准；不确定时可先 `rds-openapi-skill list` 查看描述，再按文档构造 JSON。
+参数名以各工具在代码中的定义为准；不确定时可先 `alibabacloud-rds-instances-manage list` 查看描述，再按文档构造 JSON。

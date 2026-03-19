@@ -184,7 +184,7 @@ export MCP_TOOLSETS=rds,rds_mssql_custom
 本项目支持通过 Skills 扩展功能，增强 RDS Copilot 的能力。当前提供：
 
 - **alibabacloud-rds-copilot**：调用 RDS AI 助手 API，完成智能问答、SQL 优化、故障排查等。
-- **rds-openapi-skill**：以**脚本/命令行**形式暴露本项目的 **OpenAPI 工具** 与 **SQL 工具**，支持接入 **OpenClaw、Claude Code** 等：大模型通过执行 `rds-openapi-skill list` 与 `rds-openapi-skill run <工具名> '<JSON 参数>'` 管理 RDS 实例（查询实例/监控/慢日志/参数、执行只读 SQL 等）。安装本包后即可使用 `rds-openapi-skill` 命令；Skill 目录见 `skill/rds-openapi-skill/`。
+- **alibabacloud-rds-instances-manage**：以**脚本/命令行**形式暴露本项目的 **OpenAPI 工具** 与 **SQL 工具**，支持接入 **OpenClaw、Claude Code** 等：大模型通过执行 `alibabacloud-rds-instances-manage list` 与 `alibabacloud-rds-instances-manage run <工具名> '<JSON 参数>'` 管理 RDS 实例（查询实例/监控/慢日志/参数、执行只读 SQL 等）。安装本包后即可使用 `alibabacloud-rds-instances-manage` 命令；Skill 目录见 `skill/alibabacloud-rds-instances-manage/`。
 
 详细使用说明请参考：[Skills 使用文档](./skill/skill_readme_cn.md)
 
