@@ -3,7 +3,7 @@
 本仓库提供两类 Skill，均可用于 Claude、OpenClaw、Claude Code 等以「技能」形式接入：
 
 1. **alibabacloud-rds-copilot**：调用阿里云 RDS AI 助手 API，完成智能问答、SQL 优化、故障排查等。
-2. **rds-openapi-skill**：通过命令行直接调用本项目的 **RDS OpenAPI 工具** 与 **只读 SQL 工具**，管理实例、查监控/慢日志/参数、执行只读 SQL 等。
+2. **alibabacloud-rds-instances-manage**：通过命令行直接调用本项目的 **RDS OpenAPI 工具** 与 **只读 SQL 工具**，管理实例、查监控/慢日志/参数、执行只读 SQL 等。
 
 ---
 
@@ -185,9 +185,9 @@ python3 alibabacloud-rds-copilot/scripts/call_rds_ai.py "your query"
 
 ---
 
-## 二、RDS OpenAPI Skill（OpenAPI + SQL 工具命令行）
+## 二、Alibabacloud RDS Instances Manage（OpenAPI + SQL 工具命令行）
 
-**rds-openapi-skill** 将本项目的 MCP 工具以「脚本/命令行」形式暴露，便于接入 **OpenClaw、Claude Code** 等：大模型通过执行 `rds-openapi-skill list` / `rds-openapi-skill run <工具名> '<JSON 参数>'` 来调用 RDS OpenAPI 与只读 SQL 能力，从而管理 RDS 实例。
+**alibabacloud-rds-instances-manage** 将本项目的 MCP 工具以「脚本/命令行」形式暴露，便于接入 **OpenClaw、Claude Code** 等：大模型通过执行 `alibabacloud-rds-instances-manage list` / `alibabacloud-rds-instances-manage run <工具名> '<JSON 参数>'` 来调用 RDS OpenAPI 与只读 SQL 能力，从而管理 RDS 实例。
 
 ### 能力概览
 
@@ -198,7 +198,7 @@ python3 alibabacloud-rds-copilot/scripts/call_rds_ai.py "your query"
 
 1. **安装本包**（任选其一）  
    - 在仓库根目录：`uv pip install -e .` 或 `pip install -e .`  
-   - 安装后可使用命令：`rds-openapi-skill`
+   - 安装后可使用命令：`alibabacloud-rds-instances-manage`
 
 2. **环境变量**（与 MCP 服务相同）  
    - `ALIBABA_CLOUD_ACCESS_KEY_ID`、`ALIBABA_CLOUD_ACCESS_KEY_SECRET`（必填）  
@@ -208,12 +208,12 @@ python3 alibabacloud-rds-copilot/scripts/call_rds_ai.py "your query"
 
 ```bash
 # 列出当前启用的工具（JSON）
-rds-openapi-skill list
+alibabacloud-rds-instances-manage list
 
 # 执行工具，参数为 JSON 字符串
-rds-openapi-skill run describe_db_instances '{"region_id":"cn-hangzhou"}'
-rds-openapi-skill run describe_db_instance_attribute '{"region_id":"cn-hangzhou","db_instance_id":"rm-xxxxx"}'
-rds-openapi-skill run get_current_time '{}'
+alibabacloud-rds-instances-manage run describe_db_instances '{"region_id":"cn-hangzhou"}'
+alibabacloud-rds-instances-manage run describe_db_instance_attribute '{"region_id":"cn-hangzhou","db_instance_id":"rm-xxxxx"}'
+alibabacloud-rds-instances-manage run get_current_time '{}'
 ```
 
 未安装到环境时，可从仓库根目录用模块方式执行：
@@ -226,15 +226,15 @@ uv run python -m alibabacloud_rds_openapi_mcp_server.run_tool run describe_db_in
 ### 接入 OpenClaw / Claude Code
 
 1. **部署 Skill 目录**  
-   将 `skill/rds-openapi-skill/` 复制或链接到对应平台的 skills 目录，例如：  
-   - OpenClaw：`~/.openclaw/workspace/skills/rds-openapi-skill/`  
-   - Claude Code：`~/.claude/skills/rds-openapi-skill/` 或项目内 `.claude/skills/rds-openapi-skill/`
+   将 `skill/alibabacloud-rds-instances-manage/` 复制或链接到对应平台的 skills 目录，例如：  
+   - OpenClaw：`~/.openclaw/workspace/skills/alibabacloud-rds-instances-manage/`  
+   - Claude Code：`~/.claude/skills/alibabacloud-rds-instances-manage/` 或项目内 `.claude/skills/alibabacloud-rds-instances-manage/`
 
 2. **配置 entries 并写入 env（推荐）**  
-   本 skill 需要环境变量 `ALIBABA_CLOUD_ACCESS_KEY_ID` 和 `ALIBABA_CLOUD_ACCESS_KEY_SECRET`。建议在平台的 **entries** 里为 `rds-openapi-skill` 配置 `env`，把这两个变量写进去，后续使用无需再单独配置。  
+   本 skill 需要环境变量 `ALIBABA_CLOUD_ACCESS_KEY_ID` 和 `ALIBABA_CLOUD_ACCESS_KEY_SECRET`。建议在平台的 **entries** 里为 `alibabacloud-rds-instances-manage` 配置 `env`，把这两个变量写进去，后续使用无需再单独配置。  
    - **OpenClaw**：编辑 `~/.openclaw/openclaw.json`，在 `skills.entries` 中增加：
      ```json
-     "rds-openapi-skill": {
+     "alibabacloud-rds-instances-manage": {
        "enabled": true,
        "env": {
          "ALIBABA_CLOUD_ACCESS_KEY_ID": "你的 AccessKey ID",
@@ -243,12 +243,12 @@ uv run python -m alibabacloud_rds_openapi_mcp_server.run_tool run describe_db_in
      }
      ```
    - 可选：同一 `env` 中可加 `ALIBABA_CLOUD_SECURITY_TOKEN`（STS）、`MCP_TOOLSETS`（如 `"rds,rds_custom_read"`）。  
-   - **Claude Code 等**：在对应技能的「entries」或「环境变量」配置中为 `rds-openapi-skill` 设置上述两个 env 即可。
+   - **Claude Code 等**：在对应技能的「entries」或「环境变量」配置中为 `alibabacloud-rds-instances-manage` 设置上述两个 env 即可。
 
 3. **确保环境中可执行**  
-   安装本包后，保证在终端能直接运行 `rds-openapi-skill`。大模型会按 SKILL.md 中的说明调用 `rds-openapi-skill list` 与 `rds-openapi-skill run <name> '<json>'`。
+   安装本包后，保证在终端能直接运行 `alibabacloud-rds-instances-manage`。大模型会按 SKILL.md 中的说明调用 `alibabacloud-rds-instances-manage list` 与 `alibabacloud-rds-instances-manage run <name> '<json>'`。
 
 4. **Skill 内容说明**  
-   - `skill/rds-openapi-skill/SKILL.md`：技能名称、描述、何时使用、标准流程、**配置 entries** 与常用工具速查。  
-   - `skill/rds-openapi-skill/tools_reference.md`：工具名与参数参考。  
-   - `skill/rds-openapi-skill/skill.yaml`：供 OpenClaw/ClawHub 使用的元数据（可选）。
+   - `skill/alibabacloud-rds-instances-manage/SKILL.md`：技能名称、描述、何时使用、标准流程、**配置 entries** 与常用工具速查。  
+   - `skill/alibabacloud-rds-instances-manage/tools_reference.md`：工具名与参数参考。  
+   - `skill/alibabacloud-rds-instances-manage/skill.yaml`：供 OpenClaw/ClawHub 使用的元数据（可选）。

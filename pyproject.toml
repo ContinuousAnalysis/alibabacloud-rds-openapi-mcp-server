@@ -34,4 +34,4 @@ packages = ["src/alibabacloud_rds_openapi_mcp_server"]
 
 [project.scripts]
 alibabacloud-rds-openapi-mcp-server = "alibabacloud_rds_openapi_mcp_server.server:main"
-rds-openapi-skill = "alibabacloud_rds_openapi_mcp_server.run_tool:main"
+alibabacloud-rds-instances-manage = "alibabacloud_rds_openapi_mcp_server.run_tool:main"

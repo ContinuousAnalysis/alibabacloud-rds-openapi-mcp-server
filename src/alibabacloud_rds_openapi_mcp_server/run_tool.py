@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-RDS OpenAPI Skill CLI: 以命令行方式列出并执行 MCP 工具，供 OpenClaw、Claude Code 等通过 Skill 调用。
+Alibabacloud RDS Instances Manage CLI: 以命令行方式列出并执行 MCP 工具，供 OpenClaw、Claude Code 等通过 Skill 调用。
 
 用法:
-  rds-openapi-skill list [--toolsets rds]
-  rds-openapi-skill run <tool_name> <json_args>
+  alibabacloud-rds-instances-manage list [--toolsets rds]
+  alibabacloud-rds-instances-manage run <tool_name> <json_args>
 
 环境变量:
   ALIBABA_CLOUD_ACCESS_KEY_ID, ALIBABA_CLOUD_ACCESS_KEY_SECRET  (必需)
@@ -74,7 +74,7 @@ def cmd_run(tool_name: str, args_json: str) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="RDS OpenAPI Skill CLI: list or run tools for use by LLM skills."
+        description="Alibabacloud RDS Instances Manage CLI: list or run tools for use by LLM skills."
     )
     sub = parser.add_subparsers(dest="command", required=True)
     list_p = sub.add_parser("list", help="List available tools (JSON)")
