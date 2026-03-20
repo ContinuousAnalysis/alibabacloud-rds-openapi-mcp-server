@@ -1,9 +1,20 @@
 # RDS 相关 Skills 使用说明
 
-本仓库提供两类 Skill，均可用于 Claude、OpenClaw、Claude Code 等以「技能」形式接入：
+本仓库提供多类 Skill，均可用于 Claude、OpenClaw、Claude Code 等以「技能」形式接入：
+
+## 核心 RDS Skills
 
 1. **alibabacloud-rds-copilot**：调用阿里云 RDS AI 助手 API，完成智能问答、SQL 优化、故障排查等。
 2. **alibabacloud-rds-instances-manage**：通过命令行直接调用本项目的 **RDS OpenAPI 工具** 与 **只读 SQL 工具**，管理实例、查监控/慢日志/参数、执行只读 SQL 等。
+
+## 其他 Skills
+
+3. **mcporter**：使用 mcporter CLI 直接列出、配置、认证和调用 MCP 服务器/工具（HTTP 或 stdio），包括临时服务器、配置编辑和 CLI/类型生成。
+4. **cli-anything**：使用 CLI-Anything 方法论为现有软件/代码库生成或改进适用于代理的 CLI。将 GUI 应用、桌面工具、仓库、SDK 或 Web/API 表面转换为适用于代理的结构化 CLI。
+5. **data-analyst**：数据可视化、报告生成、SQL 查询和电子表格自动化。将您的 AI 代理转变为精通数据的分析师，将原始数据转化为可操作的洞察。
+6. **arxiv-watcher**：搜索和总结 ArXiv 论文。当您需要最新研究、ArXiv 上的特定主题或 AI 论文的每日摘要时使用。
+7. **duckdb-cli-ai-skills**：DuckDB CLI 专家，用于 SQL 分析、数据处理和文件转换。用于 SQL 查询、CSV/Parquet/JSON 分析、数据库查询或数据转换。
+8. **self-improving-agent**：捕获学习、错误和更正以实现持续改进。当命令失败、用户纠正您或发现更好的方法时使用。
 
 ---
 

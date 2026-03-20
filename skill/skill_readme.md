@@ -1,9 +1,20 @@
 # RDS Skills Documentation
 
-This repository provides two skills that can be used with Claude, OpenClaw, Claude Code, and similar platforms:
+This repository provides multiple skills that can be used with Claude, OpenClaw, Claude Code, and similar platforms:
+
+## Core RDS Skills
 
 1. **alibabacloud-rds-copilot**: Invokes the Alibaba Cloud RDS AI Assistant API for intelligent Q&A, SQL optimization, and troubleshooting.
 2. **alibabacloud-rds-instances-manage**: Exposes this project's **RDS OpenAPI tools** and **read-only SQL tools** via a **script/CLI**, so you can manage instances, query monitoring/slow logs/parameters, and run read-only SQL.
+
+## Additional Skills
+
+3. **mcporter**: Use the mcporter CLI to list, configure, auth, and call MCP servers/tools directly (HTTP or stdio), including ad-hoc servers, config edits, and CLI/type generation.
+4. **cli-anything**: Generate or refine agent-usable CLIs for existing software/codebases using the CLI-Anything methodology. Turn GUI apps, desktop tools, repositories, SDKs, or web/API surfaces into structured CLIs for agents.
+5. **data-analyst**: Data visualization, report generation, SQL queries, and spreadsheet automation. Transform your AI agent into a data-savvy analyst that turns raw data into actionable insights.
+6. **arxiv-watcher**: Search and summarize papers from ArXiv. Use when you need the latest research, specific topics on ArXiv, or a daily summary of AI papers.
+7. **duckdb-cli-ai-skills**: DuckDB CLI specialist for SQL analysis, data processing and file conversion. Use for SQL queries, CSV/Parquet/JSON analysis, database queries, or data conversion.
+8. **self-improving-agent**: Captures learnings, errors, and corrections to enable continuous improvement. Use when commands fail, users correct you, or better approaches are discovered.
 
 ---
 
